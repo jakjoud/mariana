@@ -1,0 +1,223 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-0-0.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-1-2.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-0-2.png" type="Texture" id=3]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-1-0.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-2-1.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-1-1.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-2-0.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_teeth_sheet-0-1.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-1-1.png" type="Texture" id=9]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-1-0.png" type="Texture" id=10]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-1-2.png" type="Texture" id=11]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-2-0.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-2-1.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-0-0.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-0-1.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Characters/EyeBoss/monster_flesh_eye_sheet-0-2.png" type="Texture" id=16]
+[ext_resource path="res://Character/EnnemyBossEye.gd" type="Script" id=17]
+[ext_resource path="res://Resources/GUI/BOSS_HP_OVER.png" type="Texture" id=18]
+[ext_resource path="res://Resources/GUI/BOSS_HP_BG.png" type="Texture" id=19]
+[ext_resource path="res://Resources/GUI/BOSS_HP_FILL.png" type="Texture" id=20]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 8 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 2 ), ExtResource( 7 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "closed",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 10 ), ExtResource( 9 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "open",
+"speed": 8.0
+} ]
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 27.2947
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AnimatedSprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AnimatedSprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "hurt"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 0.254902 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "reveal"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="EnnemyBossEye" type="Area2D"]
+script = ExtResource( 17 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+modulate = Color( 0, 0, 0, 0 )
+frames = SubResource( 1 )
+animation = "open"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/die = SubResource( 5 )
+anims/hurt = SubResource( 6 )
+anims/reveal = SubResource( 4 )
+
+[node name="HP" type="CanvasLayer" parent="."]
+
+[node name="TextureProgress" type="TextureProgress" parent="HP"]
+visible = false
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 400.0
+margin_top = -64.0
+margin_right = -400.0
+value = 100.0
+texture_under = ExtResource( 19 )
+texture_over = ExtResource( 18 )
+texture_progress = ExtResource( 20 )
+tint_progress = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DownCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 150 )
+
+[node name="UpCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -150 )
+
+[node name="OpenEyeTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="LeftCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( -500, 0 )
+
+[node name="RightCast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 500, 0 )
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.75
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_EnnemyBossEye_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="OpenEyeTimer" to="." method="_on_OpenEyeTimer_timeout"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]

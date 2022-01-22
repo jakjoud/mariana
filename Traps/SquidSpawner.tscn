@@ -1,0 +1,84 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Resources/Traps/Spawner_0.png" type="Texture" id=1]
+[ext_resource path="res://Traps/SquidSpawner.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=2]
+colors = PoolColorArray( 0.0588235, 0, 0.341176, 1, 1, 1, 1, 0 )
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 870.0
+
+[node name="SquidSpawner" type="Sprite"]
+position = Vector2( 142, 77 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 100
+lifetime = 10.0
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 45.62
+gravity = Vector2( 0, 0 )
+orbit_velocity_random = 1.0
+linear_accel = 28.44
+linear_accel_random = 0.61
+radial_accel = 100.0
+radial_accel_random = 1.0
+tangential_accel = 100.0
+angle = 257.6
+scale_amount = 5.0
+scale_amount_curve = SubResource( 1 )
+color_ramp = SubResource( 2 )
+
+[node name="Spawner" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 4 )
+anims/die = SubResource( 3 )
+
+[node name="Activator" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Activator"]
+shape = SubResource( 5 )
+
+[connection signal="timeout" from="Spawner" to="." method="_on_Spawner_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="body_entered" from="Activator" to="." method="_on_Activator_body_entered"]

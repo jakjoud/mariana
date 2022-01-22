@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Resources/Font/AvenuePixel-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Props/ScrollingText.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+font_data = ExtResource( 1 )
+
+[node name="ScrollingText" type="Label"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 10.0
+margin_bottom = 74.0
+custom_fonts/font = SubResource( 2 )
+text = "Epilogue"
+align = 1
+valign = 1
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

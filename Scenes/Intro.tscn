@@ -1,0 +1,125 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Resources/BGS/Ocean/sea_background.png" type="Texture" id=1]
+[ext_resource path="res://Resources/VFX/Falling.png" type="Texture" id=2]
+[ext_resource path="res://Resources/Vehicles/vehicle-2.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Intro.gd" type="Script" id=4]
+[ext_resource path="res://Resources/Font/AvenuePixel-Regular.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://Scenes/Transition.tscn" type="PackedScene" id=6]
+
+[sub_resource type="Gradient" id=1]
+colors = PoolColorArray( 1, 1, 1, 1, 0, 0.658824, 0.92549, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.156863, 0.882353, 1, 0.462745 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 120
+outline_size = 3
+outline_color = Color( 0.176471, 0.27451, 0.568627, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 64
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 64
+outline_size = 1
+outline_color = Color( 0.176471, 0.27451, 0.568627, 1 )
+font_data = ExtResource( 5 )
+
+[node name="Intro" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="FallingParticles" type="CPUParticles2D" parent="."]
+position = Vector2( 928, 1256 )
+amount = 300
+lifetime = 10.0
+speed_scale = 2.0
+randomness = 0.44
+texture = ExtResource( 2 )
+emission_shape = 2
+emission_rect_extents = Vector2( 1024, 1 )
+gravity = Vector2( 0, -200 )
+linear_accel = 27.52
+color_ramp = SubResource( 1 )
+
+[node name="Vehicle" type="Sprite" parent="."]
+position = Vector2( 297, -234 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="VehicleEntry" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="Transition" parent="GUI" instance=ExtResource( 6 )]
+
+[node name="Panel" type="Panel" parent="GUI"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 600.0
+margin_bottom = 200.0
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="GUI/Panel"]
+anchor_right = 1.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.92549, 0.717647, 0.137255, 1 )
+custom_colors/font_outline_modulate = Color( 0.176471, 0.27451, 0.568627, 1 )
+custom_fonts/font = SubResource( 3 )
+text = "Mariana"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Subtitle" type="Label" parent="GUI/Panel"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -63.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 4 )
+text = "Fall of the Naughtilus"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="GUI/Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -74.0
+margin_top = -73.0
+margin_right = 82.0
+custom_colors/font_color = Color( 0.92549, 0.717647, 0.137255, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "Start"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="VehicleEntry" to="." method="_on_VehicleEntry_timeout"]
+[connection signal="button_down" from="GUI/Panel/Start" to="." method="_on_Start_button_down"]
